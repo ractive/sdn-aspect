@@ -1,5 +1,5 @@
 package com.example.aspect.domain;
 
-public interface EnhancedPerson {
+public interface EnhancedNode  {
 	public void saveMe();
 }
