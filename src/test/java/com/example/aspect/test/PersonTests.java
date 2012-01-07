@@ -50,13 +50,34 @@ public class PersonTests {
 	}
 	
 	/**
-	 * This test <i>should</i> call SDNs persist() in the saveMe() method...
+	 * This test shows that SDNs persist() is called in the saveMe() method...
 	 */
 	@Test
 	public void persistEnhancedPersonImpl() {
 		EnhancedPersonImpl p = new EnhancedPersonImpl();
 		p.setName("james");
 		p.saveMe();
+		
+		EnhancedPersonImpl loaded = neo4j.findOne(p.getNodeId(), EnhancedPersonImpl.class);
+		assertEquals(p.getNodeId(), loaded.getNodeId());
+		assertEquals(p.getName(), loaded.getName());
+	}
+	
+	/**
+	 * This test shows a strange behaviour with the EnhancedPersonAspect, where the
+	 * field of the FieldSignatureImpl is null.
+	 */
+	@Test
+	public void addFriend() {
+		EnhancedPersonImpl p = new EnhancedPersonImpl();
+		p.setName("james");
+		p.saveMe();
+		
+		EnhancedPersonImpl foo = new EnhancedPersonImpl();
+		foo.setName("foo");
+		foo.saveMe();
+		foo.addFriend(p);
+		
 		
 		EnhancedPersonImpl loaded = neo4j.findOne(p.getNodeId(), EnhancedPersonImpl.class);
 		assertEquals(p.getNodeId(), loaded.getNodeId());
