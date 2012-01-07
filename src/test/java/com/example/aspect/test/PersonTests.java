@@ -2,6 +2,7 @@ package com.example.aspect.test;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class PersonTests {
 	/**
 	 * Shows that a member field that is introduced by an aspect, is not "catched" by the Spring Data Neo4j getter and setter pointcuts. 
 	 */
+	@Ignore
 	@Test
 	public void persistPerson() {
 		Person p = new Person();
